@@ -33,7 +33,7 @@ target
 
 The plugin.yml is a file made to contain information about the plugin.
 
-[Source](https://www.spigotmc.org/wiki/plugin-yml/)
+[Reference](https://www.spigotmc.org/wiki/plugin-yml/)
 
 ## Modules and classes
 

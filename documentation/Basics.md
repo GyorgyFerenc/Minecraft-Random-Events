@@ -43,17 +43,26 @@ public class Counter extends BukkitRunnable { // Uppercase for class names
 
     int scoreCounter = 0; // camelCase member variable
 
-    private void increaseScore() { // camelCase member function
-        this.scoreCounter++;
-    }
-}
+    private void increaseScore() { // camelCase member functionCodeingfects
 ```
 
-Use specifications for functions if (at least one):
-
-- The name does not explain himself well enough
-- It has side effects
 - It throws error
 - etc.
 
 If you can name a code segment it is a function.
+
+## Documentation
+
+There are two "main" folders for the documentation:
+
+- UML
+- Markdown
+
+The UML folder holds the diagrams of the class hierarchy, as well as some sequence diagrams, which simulate the flow of the information.
+
+The Markdown folder is for the written documentation using the markdown syntax.
+
+The structure of that is the following. The entry is the [Documentation](Documentation.md) file.
+Here are the basic stuffs about the project, the structure of the source files, a list of modules, etc.
+
+Every module will have it's separate file for their own documentation respecting the source's structure.

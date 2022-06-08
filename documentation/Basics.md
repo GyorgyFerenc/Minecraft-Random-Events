@@ -46,6 +46,10 @@ public class Counter extends BukkitRunnable { // Uppercase for class names
     private void increaseScore() { // camelCase member functionCodeingfects
 ```
 
+Use specifications for functions if (at least one):
+
+- The name does not explain himself well enough
+- It has side effects
 - It throws error
 - etc.
 

@@ -3,6 +3,7 @@
 ## Table of content
 
 - [Source structure](#source-structure)
+- [Plugin.yml](#plugin.yml)
 - [Modules and classes](#modules-and-classes)
 
 ## Source structure
@@ -28,9 +29,12 @@ target
 
 [Code Structure reference](https://cedesk.github.io/code-structure/)
 
+## Plugin.yml
+
+The plugin.yml is a file made to contain information about the plugin.
+
+[Source](https://www.spigotmc.org/wiki/plugin-yml/)
+
 ## Modules and classes
 
 - [RandomEvents](./Markdown/RandomEvents.md)
-
-[Source structure]: #Source-structure
-[Modules and classes]: #Modules-and-classes

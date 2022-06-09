@@ -12,6 +12,8 @@ public class RandomEvents extends JavaPlugin {
 
 This is the main plugin class
 
+[Java File](../../src/main/java/antisocialgang/randomevents/RandomEvents.java)
+
 ## Functions
 
 ### onEnable

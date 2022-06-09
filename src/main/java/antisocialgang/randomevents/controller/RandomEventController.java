@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import antisocialgang.randomevents.RandomEvents;
+import antisocialgang.randomevents.RandomEventPlugin;
 import antisocialgang.randomevents.domain.RandomEvent;
 import antisocialgang.randomevents.domain.RandomEventGenerator;
 
@@ -16,9 +16,9 @@ import antisocialgang.randomevents.domain.RandomEventGenerator;
  * It controlles the spawining and maintaining of the Random events
  * 
  */
-public class RandomEventController extends BukkitRunnable {
+final public class RandomEventController extends BukkitRunnable {
 
-    private RandomEvents plugin;
+    private RandomEventPlugin plugin;
 
     private long tick;
     private long eventTick; // Represents the tick on which it needs to create a new random event
@@ -27,7 +27,7 @@ public class RandomEventController extends BukkitRunnable {
 
     private PriorityQueue<RandomEventWrapper> eventWrappers;
 
-    public RandomEventController(RandomEvents plugin) {
+    public RandomEventController(RandomEventPlugin plugin) {
         this.plugin = plugin;
         this.tick = 0;
         this.eventTick = 0;
@@ -76,7 +76,7 @@ public class RandomEventController extends BukkitRunnable {
         long endTime = this.tick + event.duration();
         RandomEventWrapper wrapper = new RandomEventWrapper(event, endTime, task);
         this.eventWrappers.add(wrapper);
-        Bukkit.getServer().broadcastMessage("Event added!");
+        Bukkit.getServer().broadcastMessage("Event added!"); // Debug
 
     }
 
@@ -99,7 +99,9 @@ public class RandomEventController extends BukkitRunnable {
         this.eventWrappers.poll();
 
         head.task.cancel();
-        Bukkit.getServer().broadcastMessage("Event cancelled!");
+        Bukkit.getServer().broadcastMessage("Event cancelled!"); // Debug
+
+        head.event.cleanUp();
 
         // Check for next event
         this.checkForExperiedEvents();

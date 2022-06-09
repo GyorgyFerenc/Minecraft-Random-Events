@@ -4,7 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import antisocialgang.randomevents.controller.RandomEventController;
 
-public class RandomEvents extends JavaPlugin {
+public class RandomEventPlugin extends JavaPlugin {
     // private RandomEventController controller;
 
     @Override

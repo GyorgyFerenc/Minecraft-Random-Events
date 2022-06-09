@@ -2,14 +2,14 @@ package antisocialgang.randomevents.domain;
 
 import org.bukkit.Bukkit;
 
-import antisocialgang.randomevents.RandomEvents;
+import antisocialgang.randomevents.RandomEventPlugin;
 
 /**
  * TestEvent
  */
 public class TestEvent extends RandomEvent {
 
-    public TestEvent(RandomEvents plugin) {
+    public TestEvent(RandomEventPlugin plugin) {
         super(plugin);
     }
 
@@ -27,7 +27,7 @@ public class TestEvent extends RandomEvent {
         Bukkit.getServer().broadcastMessage("This is the test event yeeeey!... Hello Mom!");
     }
 
-    public static RandomEvent create(RandomEvents plugin) {
+    public static RandomEvent create(RandomEventPlugin plugin) {
         return new TestEvent(plugin);
     }
 }

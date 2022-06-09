@@ -1,4 +1,4 @@
-# RandomEvents
+# RandomEventPlugin
 
 ```java
 public class RandomEvents extends JavaPlugin {
@@ -12,7 +12,7 @@ public class RandomEvents extends JavaPlugin {
 
 This is the main plugin class
 
-[Java File](../../src/main/java/antisocialgang/randomevents/RandomEvents.java)
+[Java File](../../src/main/java/antisocialgang/randomevents/RandomEventPlugin.java)
 
 ## Functions
 

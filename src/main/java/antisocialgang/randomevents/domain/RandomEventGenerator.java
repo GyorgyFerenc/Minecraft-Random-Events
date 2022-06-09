@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import antisocialgang.randomevents.RandomEvents;
+import antisocialgang.randomevents.RandomEventPlugin;
 
 /**
  * RandomEventGenerator
  */
 public class RandomEventGenerator {
 
-    private RandomEvents plugin;
+    private RandomEventPlugin plugin;
 
     private List<RandomEventWrapper> list;
     private int max;
 
-    private void InitList() {
+    private void initList() {
         this.addRandomEvent(() -> {
-            return TestEvent.create(this.plugin);
+            return new TestEvent(this.plugin);
         }, 5);
     }
 
-    public RandomEventGenerator(RandomEvents plugin) {
+    public RandomEventGenerator(RandomEventPlugin plugin) {
         this.plugin = plugin;
         this.max = 0;
         this.list = new ArrayList<>();
 
-        this.InitList();
+        this.initList();
     }
 
     private void addRandomEvent(Creator eventCreator, int weight) {

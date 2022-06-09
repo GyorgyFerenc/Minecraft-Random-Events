@@ -2,7 +2,7 @@ package antisocialgang.randomevents.domain;
 
 import java.lang.Runnable;
 
-import antisocialgang.randomevents.RandomEvents;
+import antisocialgang.randomevents.RandomEventPlugin;
 
 /**
  * RandomEvent
@@ -11,9 +11,9 @@ public abstract class RandomEvent implements Runnable {
 
     private long currentTick;
 
-    protected final RandomEvents plugin;
+    protected final RandomEventPlugin plugin;
 
-    protected RandomEvent(RandomEvents plugin) {
+    protected RandomEvent(RandomEventPlugin plugin) {
         this.plugin = plugin;
         this.currentTick = 0;
     }
@@ -39,4 +39,9 @@ public abstract class RandomEvent implements Runnable {
         this.tick(this.currentTick);
         this.currentTick++;
     }
+
+    public void cleanUp() {
+
+    }
+
 }

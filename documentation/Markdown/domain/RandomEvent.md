@@ -8,6 +8,7 @@ public abstract class RandomEvent implements Runnable {
     public abstract void tick(long tick);
     @Override
     final public void run();
+    public void cleanUp();
 
     //protected methods
     protected RandomEvent(RandomEvents plugin);
@@ -33,6 +34,14 @@ protected RandomEvent(RandomEvents plugin);
 
 It is for creating the an event. Notice that it is protected, so a RandomEvent cannot be instantiated.
 It can be only invoked from child classes
+
+### Clean up
+
+```java
+public void cleanUp();
+```
+
+It is called by the [RandomEventController](../controller/RandomEventController.md) when the event ends.
 
 ### Duration
 
@@ -62,5 +71,6 @@ __Parameters:__
 final public void run();
 ```
 
-It is invoked by the [BukkitScheduler](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/scheduler/BukkitScheduler.html) to start the event's lifecycle.
+It is invoked by the [BukkitScheduler](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/scheduler/BukkitScheduler.html)
+to start the event's lifecycle.
 __Important__ note this cannot be overriden.

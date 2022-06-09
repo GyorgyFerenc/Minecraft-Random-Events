@@ -1,20 +1,14 @@
 @startuml RandomEventsFramework
 
-class RandomEventController{
+class RandomEventController
 
-}
+class RandomEventGenerator
 
-class RandomEventGenerator{
-
-}
-
-abstract RandomEvent{
-
-}
+abstract RandomEvent
 
 RandomEventController "Uses" ..>  RandomEventGenerator
 
-RandomEventController "Schedules" ..>  RandomEvent
+RandomEventController "Manages" ..>  RandomEvent
 
 RandomEventGenerator "Generates" ..> RandomEvent
 

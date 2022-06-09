@@ -1,0 +1,15 @@
+@startuml RandomEvents
+
+class RandomEvents  {
+    {method} +onEnable()
+    {method} +onDisable()
+}
+
+JavaPlugin <|-- RandomEvents
+
+note top of JavaPlugin #feffdd
+ org.bukkit.plugin.java.JavaPlugin
+ from the spigot Api.
+endnote
+
+@enduml

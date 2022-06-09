@@ -62,7 +62,9 @@ There are two "main" folders for the documentation:
 - UML
 - Markdown
 
-The UML folder holds the diagrams of the class hierarchy, as well as some sequence diagrams, which simulate the flow of the information.
+The UML folder holds the diagrams of the class hierarchy, as well as some sequence
+diagrams, which simulate the flow of the information.
+The Plan folder represents the plan for implementating certain features.
 
 The Markdown folder is for the written documentation using the markdown syntax.
 

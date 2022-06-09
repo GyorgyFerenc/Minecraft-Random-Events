@@ -46,6 +46,18 @@ public class Counter extends BukkitRunnable { // Uppercase for class names
     private void increaseScore() { // camelCase member functionCodeingfects
 ```
 
+Naming Convention:
+
+- Use Intention-Revealing Names
+- Avoid Disinformation and Encodings
+- Make Meaningful Distinctions
+- Use Pronounceable Names
+- Use Searchable Names
+- Pick One Word per Concept
+- Avoid using the same word for two different purposes
+
+[Reference](https://dzone.com/articles/naming-conventions-from-uncle-bobs-clean-code-phil)
+
 Use specifications for functions if (at least one):
 
 - The name does not explain himself well enough
@@ -53,7 +65,30 @@ Use specifications for functions if (at least one):
 - It throws error
 - etc.
 
-If you can name a code segment it is a function.
+Rules of function:
+
+- Should be small
+- Do one thing
+  - It means you cannot extract more functions out of it
+
+Naming functions:
+
+- As to scope scales down the function name should scale up and vica versa
+- checking functions should be named as isSomething
+- getters and setters should be named as getSomething and setSomething
+- camelCase
+
+Naming variables:
+
+- As to scope scales down the variable name should scale down and vica versa
+- camelCase
+
+Naming classes:
+
+- As to scope scales down the class name should scale down and vica versa
+- UpperCase
+
+[Reference](https://www.youtube.com/playlist?list=PLmmYSbUCWJ4x1GO839azG_BBw8rkh-zOj)
 
 ## Documentation
 

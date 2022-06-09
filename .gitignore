@@ -6,3 +6,6 @@ target/**
 
 # plantUml 
 out/**
+
+# VSCodeCounter
+.VSCodeCounter/**

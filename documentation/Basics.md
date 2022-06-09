@@ -69,7 +69,7 @@ Rules of function:
 
 - Should be small
 - Do one thing
-  - It means you cannot extract more functions out of it
+  - It means you can not extract more functions out of it
 
 Naming functions:
 

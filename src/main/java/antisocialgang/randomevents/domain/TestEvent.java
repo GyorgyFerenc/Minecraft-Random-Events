@@ -14,7 +14,7 @@ public class TestEvent extends RandomEvent {
     }
 
     @Override
-    public long Duration() {
+    public long duration() {
         return 20 * 60 * 2; // 2 minute
     }
 

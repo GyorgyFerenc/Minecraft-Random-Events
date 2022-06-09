@@ -15,6 +15,8 @@ src
 │       ├── antisocialgang
 │       │   └── randomevents
 │       │       ├── commands # For commands
+│       │       ├── controller # For controllers
+│       │       ├── domain # For domain
 │       │       └── RandomEvents.java # Main entry point
 │       └── plugin.yml # Plugin file for the spigot API
 └── test # Unit and other testing
@@ -24,7 +26,7 @@ src
 target
 │
 ...
-└── randomevents-1.0.jar # The jar file of the plugin
+└── randomevents-x.x.jar # The jar file of the plugin
 ```
 
 [Code Structure reference](https://cedesk.github.io/code-structure/)

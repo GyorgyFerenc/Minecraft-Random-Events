@@ -1,7 +1,5 @@
 package antisocialgang.randomevents.domain;
 
-import java.util.UUID;
-
 import java.lang.Runnable;
 
 import antisocialgang.randomevents.RandomEvents;
@@ -11,19 +9,13 @@ import antisocialgang.randomevents.RandomEvents;
  */
 public abstract class RandomEvent implements Runnable {
 
-    private final UUID id;
     private long currentTick;
 
     protected final RandomEvents plugin;
 
-    RandomEvent(RandomEvents plugin) {
+    protected RandomEvent(RandomEvents plugin) {
         this.plugin = plugin;
-        this.id = UUID.randomUUID();
         this.currentTick = 0;
-    }
-
-    public UUID getUUID() {
-        return this.id;
     }
 
     /**
@@ -33,7 +25,7 @@ public abstract class RandomEvent implements Runnable {
      * 
      * @return long - the duration of the random event
      */
-    public abstract long Duration();
+    public abstract long duration();
 
     /**
      * Runs on every tick
@@ -43,7 +35,7 @@ public abstract class RandomEvent implements Runnable {
     public abstract void tick(long tick);
 
     @Override
-    public void run() {
+    final public void run() {
         this.tick(this.currentTick);
         this.currentTick++;
     }

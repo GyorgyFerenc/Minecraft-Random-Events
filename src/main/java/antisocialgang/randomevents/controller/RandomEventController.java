@@ -73,7 +73,7 @@ public class RandomEventController extends BukkitRunnable {
         // Schedule the event
         BukkitTask task = Bukkit.getScheduler().runTaskTimer(this.plugin, event, 0, 0);
 
-        long endTime = this.tick + event.Duration();
+        long endTime = this.tick + event.duration();
         RandomEventWrapper wrapper = new RandomEventWrapper(event, endTime, task);
         this.eventWrappers.add(wrapper);
         Bukkit.getServer().broadcastMessage("Event added!");

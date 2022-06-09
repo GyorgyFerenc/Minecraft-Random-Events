@@ -1,0 +1,21 @@
+@startuml RandomEventsFramework
+
+class RandomEventController{
+
+}
+
+class RandomEventGenerator{
+
+}
+
+abstract RandomEvent{
+
+}
+
+RandomEventController "Uses" ..>  RandomEventGenerator
+
+RandomEventController "Schedules" ..>  RandomEvent
+
+RandomEventGenerator "Generates" ..> RandomEvent
+
+@enduml

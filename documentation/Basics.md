@@ -55,6 +55,7 @@ Naming Convention:
 - Use Searchable Names
 - Pick One Word per Concept
 - Avoid using the same word for two different purposes
+- Avoid cryptography (this is not an ARG)
 
 [Reference](https://dzone.com/articles/naming-conventions-from-uncle-bobs-clean-code-phil)
 

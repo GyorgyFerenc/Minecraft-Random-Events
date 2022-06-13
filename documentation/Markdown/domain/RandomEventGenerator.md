@@ -10,6 +10,7 @@ public class RandomEventGenerator {
     //Private method
     private void initList();
     private void addRandomEvent(Creator eventCreator, int weight);
+    private Range<Integer> createRandomRangeForRandomEvent(int weight);
 
     //Representation
     private RandomEventPlugin plugin;
@@ -22,11 +23,10 @@ interface Creator {
 }
 
 class RandomEventWrapper {
-    public int x;
-    public int y;
+    Range<Integer> randomRange;
     public Creator eventCreator;
 
-    public RandomEventWrapper(Creator event, int x, int y);
+    public RandomEventWrapper(Creator event, Range<Integer> randomRange);
 }
 ```
 
@@ -37,7 +37,7 @@ It stores a list of Creator functions specified by the interface with the same n
 The process of picking a random event is the following:
 
 - generate the number n.
-- search for the range where x <= n < y.
+- search for the range where n ∈ randomRange.
 - call the specified creator function to create the random event object.
 
 [Java File](../../../src/main/java/antisocialgang/randomevents/domain/RandomEventGenerator.java)
@@ -81,4 +81,16 @@ Note eventCreator needs two have zero parameters and returns a new RandomEvent
 __parameters__:
 
 - eventCreator - the runnable that creates the random event
+- weight - the weight of the event
+
+### Create Random Range for Random Event
+
+```java
+private Range<Integer> createRandomRangeForRandomEvent(int weight)
+```
+
+Creates the range for the event using the wieght and the last events range.
+
+__parameters__:
+
 - weight - the weight of the event

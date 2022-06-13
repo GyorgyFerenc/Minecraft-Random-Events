@@ -11,10 +11,15 @@ public class RandomEventPlugin extends JavaPlugin {
     RandomEventController randomEventController;
 
     @Override
+    public void onLoad() {
+        super.onLoad();
+    }
+
+    @Override
     public void onEnable() {
         getLogger().info("RandomEvents plugin enabled!");
         this.randomEventController = new RandomEventController(this);
-        RandomEventCommand.setUp(this, randomEventController);
+        new RandomEventCommand(this, randomEventController);
     }
 
     @Override

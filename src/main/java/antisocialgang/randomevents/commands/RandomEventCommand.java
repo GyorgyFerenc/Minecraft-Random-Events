@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.TabExecutor;
 
 import antisocialgang.randomevents.RandomEventPlugin;
 import antisocialgang.randomevents.controller.RandomEventController;
@@ -15,22 +14,15 @@ import antisocialgang.randomevents.controller.RandomEventController;
 /**
  * RandomEventCommand
  */
-public class RandomEventCommand {
-    public static void setUp(RandomEventPlugin plugin, RandomEventController randomEventController) {
-        PluginCommand p = plugin.getCommand("RandomEvent");
-        p.setExecutor(new RandomEventCommandExecutor(randomEventController));
-        p.setTabCompleter(new RandomEventCommandTabCompleter(randomEventController));
-    }
-}
+public class RandomEventCommand implements TabExecutor {
 
-/**
- * RandomEVentCommandExecutor
- */
-class RandomEventCommandExecutor implements CommandExecutor {
     RandomEventController randomEventController;
 
-    public RandomEventCommandExecutor(RandomEventController randomEventController) {
+    public RandomEventCommand(RandomEventPlugin plugin, RandomEventController randomEventController) {
         this.randomEventController = randomEventController;
+        PluginCommand p = plugin.getCommand("randomevent");
+        p.setExecutor(this);
+        p.setTabCompleter(this);
     }
 
     @Override
@@ -81,15 +73,6 @@ class RandomEventCommandExecutor implements CommandExecutor {
 
     private boolean listExecute(CommandSender sender, Command command, String label, String[] args) {
         return false;
-    }
-}
-
-class RandomEventCommandTabCompleter implements TabCompleter {
-
-    RandomEventController randomEventController;
-
-    public RandomEventCommandTabCompleter(RandomEventController randomEventController) {
-        this.randomEventController = randomEventController;
     }
 
     @Override

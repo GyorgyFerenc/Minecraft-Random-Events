@@ -56,6 +56,7 @@ Naming Convention:
 - Pick One Word per Concept
 - Avoid using the same word for two different purposes
 - Avoid cryptography (this is not an ARG)
+
 ```Java
 public class FOSINvabsduhRSFBDhsdfs extends CryptographyDecoder {
   // JUST DON'T

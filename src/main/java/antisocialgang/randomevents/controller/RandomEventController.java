@@ -14,9 +14,10 @@ import antisocialgang.randomevents.domain.RandomEventGenerator;
 /**
  * This is the main controller of the plugin.
  * It controlles the spawining and maintaining of the Random events
- * 
  */
 final public class RandomEventController extends BukkitRunnable {
+
+    private GeneratorState state;
 
     private RandomEventPlugin plugin;
 
@@ -32,6 +33,7 @@ final public class RandomEventController extends BukkitRunnable {
         this.tick = 0;
         this.eventTick = 0;
         this.eventDelay = 20 * 60;
+        this.state = GeneratorState.STOPPED;
 
         this.eventWrappers = new PriorityQueue<>(1, new RandomEventComparator());
         this.generator = new RandomEventGenerator(this.plugin);
@@ -43,8 +45,22 @@ final public class RandomEventController extends BukkitRunnable {
     @Override
     public void run() {
         this.checkForExperiedEvents();
-        this.checkIfNewEventNeeded();
+
+        if (this.state == GeneratorState.RUNNING) {
+            this.checkIfNewEventNeeded();
+        }
+
         this.tick++;
+    }
+
+    public void startGenerator() {
+        Bukkit.getConsoleSender().sendMessage("Generator started"); // DEBUG
+        this.state = GeneratorState.RUNNING;
+    }
+
+    public void stopGenerator() {
+        Bukkit.getConsoleSender().sendMessage("Generator stopped"); // DEBUG
+        this.state = GeneratorState.STOPPED;
     }
 
     /**
@@ -52,7 +68,7 @@ final public class RandomEventController extends BukkitRunnable {
      * addRandomEvent
      */
     private void checkIfNewEventNeeded() {
-        boolean needNewEvent = this.tick == this.eventTick;
+        boolean needNewEvent = this.tick >= this.eventTick;
 
         if (!needNewEvent) {
             return;
@@ -130,4 +146,9 @@ class RandomEventComparator implements Comparator<RandomEventWrapper> {
         }
         return 0;
     }
+}
+
+enum GeneratorState {
+    RUNNING,
+    STOPPED
 }

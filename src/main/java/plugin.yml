@@ -1,3 +1,9 @@
 main: antisocialgang.randomevents.RandomEventPlugin
 name: RandomEvents
 version: 1.0
+
+commands:
+  RandomEvent:
+    description: It deals with the RandomEvent plugin
+    aliases: re
+    usage: "Usage: /<command> <option>"

@@ -2,15 +2,19 @@ package antisocialgang.randomevents;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import antisocialgang.randomevents.commands.RandomEventCommand;
 import antisocialgang.randomevents.controller.RandomEventController;
 
 public class RandomEventPlugin extends JavaPlugin {
     // private RandomEventController controller;
 
+    RandomEventController randomEventController;
+
     @Override
     public void onEnable() {
         getLogger().info("RandomEvents plugin enabled!");
-        new RandomEventController(this);
+        this.randomEventController = new RandomEventController(this);
+        RandomEventCommand.setUp(this, randomEventController);
     }
 
     @Override

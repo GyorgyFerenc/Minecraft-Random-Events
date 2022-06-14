@@ -1,6 +1,9 @@
 package antisocialgang.randomevents.controller;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import org.bukkit.Bukkit;
@@ -17,7 +20,7 @@ import antisocialgang.randomevents.domain.RandomEventGenerator;
  */
 final public class RandomEventController extends BukkitRunnable {
 
-    private GeneratorState state;
+    private GeneratorState generatorState;
 
     private RandomEventPlugin plugin;
 
@@ -33,7 +36,7 @@ final public class RandomEventController extends BukkitRunnable {
         this.tick = 0;
         this.eventTick = 0;
         this.eventDelay = 20 * 60;
-        this.state = GeneratorState.STOPPED;
+        this.generatorState = GeneratorState.STOPPED;
 
         this.eventWrappers = new PriorityQueue<>(1, new RandomEventComparator());
         this.generator = new RandomEventGenerator(this.plugin);
@@ -46,7 +49,7 @@ final public class RandomEventController extends BukkitRunnable {
     public void run() {
         this.checkForExperiedEvents();
 
-        if (this.state == GeneratorState.RUNNING) {
+        if (this.generatorState == GeneratorState.RUNNING) {
             this.checkIfNewEventNeeded();
         }
 
@@ -55,12 +58,28 @@ final public class RandomEventController extends BukkitRunnable {
 
     public void startGenerator() {
         Bukkit.getConsoleSender().sendMessage("Generator started"); // DEBUG
-        this.state = GeneratorState.RUNNING;
+        this.generatorState = GeneratorState.RUNNING;
     }
 
     public void stopGenerator() {
         Bukkit.getConsoleSender().sendMessage("Generator stopped"); // DEBUG
-        this.state = GeneratorState.STOPPED;
+        this.generatorState = GeneratorState.STOPPED;
+    }
+
+    public List<String> getActiveRandomEvents() {
+        List<String> l = new ArrayList<>();
+
+        Iterator<RandomEventWrapper> it = this.eventWrappers.iterator();
+
+        while (it.hasNext()) {
+            RandomEventWrapper eventWrapper = it.next();
+            String s = " -> ";
+            s = eventWrapper.event.getName() + s;
+            s += eventWrapper.event.getID();
+            l.add(s);
+        }
+
+        return l;
     }
 
     /**
@@ -89,7 +108,7 @@ final public class RandomEventController extends BukkitRunnable {
         // Schedule the event
         BukkitTask task = Bukkit.getScheduler().runTaskTimer(this.plugin, event, 0, 0);
 
-        long endTime = this.tick + event.duration();
+        long endTime = this.tick + event.getDuration();
         RandomEventWrapper wrapper = new RandomEventWrapper(event, endTime, task);
         this.eventWrappers.add(wrapper);
         Bukkit.getServer().broadcastMessage("Event added!"); // Debug

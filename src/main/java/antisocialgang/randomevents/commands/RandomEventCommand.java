@@ -72,6 +72,13 @@ public class RandomEventCommand implements TabExecutor {
     }
 
     private boolean listExecute(CommandSender sender, Command command, String label, String[] args) {
+        List<String> l = this.randomEventController.getActiveRandomEvents();
+        StringBuilder builder = new StringBuilder();
+        for (String string : l) {
+            builder.append(string);
+            builder.append('\n');
+        }
+        sender.sendMessage(builder.toString());
         return false;
     }
 

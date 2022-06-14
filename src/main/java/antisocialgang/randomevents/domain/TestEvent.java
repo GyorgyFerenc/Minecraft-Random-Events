@@ -14,7 +14,7 @@ public class TestEvent extends RandomEvent {
     }
 
     @Override
-    public long duration() {
+    public long getDuration() {
         return 20 * 60 * 2; // 2 minute
     }
 
@@ -29,5 +29,10 @@ public class TestEvent extends RandomEvent {
 
     public static RandomEvent create(RandomEventPlugin plugin) {
         return new TestEvent(plugin);
+    }
+
+    @Override
+    public String getName() {
+        return "TestEvent";
     }
 }

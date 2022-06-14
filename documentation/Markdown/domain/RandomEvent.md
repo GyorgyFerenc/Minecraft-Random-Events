@@ -4,11 +4,13 @@
 public abstract class RandomEvent implements Runnable {
 
     //public methods
-    public abstract long duration();
+    public abstract long getDuration();
     public abstract void tick(long tick);
     @Override
     final public void run();
     public void cleanUp();
+    final public UUID getID();
+    public abstract String getName();
 
     //protected methods
     protected RandomEvent(RandomEvents plugin);
@@ -46,11 +48,27 @@ It is called by the [RandomEventController](../controller/RandomEventController.
 ### Duration
 
 ```java
-public abstract long duration();
+public abstract long getDuration();
 ```
 
 It should return the duration of the event in ticks.
 It is invoked by the [RandomEventController](../controller/RandomEventController.md).
+
+### ID
+
+```java
+final public UUID getID();
+```
+
+It returns the ID of the RandomEvent
+
+### Name
+
+```java
+public abstract String getName();
+```
+
+It returns the Name of the RandomEvent
 
 ### Tick
 

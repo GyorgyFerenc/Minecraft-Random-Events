@@ -18,18 +18,19 @@ public TestEvent(RandomEventPlugin plugin) {
 
 The constructor needs to get the RandomEventPlugin as its parameter and call super(plugin) on it, other then that no restriction
 
-Next step you want to override 2 functions:
+Next step you want to override these functions:
 
-- public long duration()
+- public long getDuration()
 - public void tick(long tick)
+- public String getName()
 
 see: [Random Event](../domain/RandomEvent.md)
 
 ```java
 @Override
-public long duration() { // Duration of the event
-    return 20 * 60 * 2; // 2 minute
-}
+    public long getDuration() { // Duration of the event
+        return 20 * 60 * 2; // 2 minute
+    }
 
 @Override
 public void tick(long tick) { //Runs on every tick
@@ -39,6 +40,12 @@ public void tick(long tick) { //Runs on every tick
 
     Bukkit.getServer().broadcastMessage("This is the test event yeeeey!... Hello Mom!");
 }
+
+@Override
+public String getName() { // Name of the event
+    return "TestEvent";
+}
+
 ```
 
 Next step is to tell the [Random Event Generator](../domain/RandomEventGenerator.md) that the random event exist.

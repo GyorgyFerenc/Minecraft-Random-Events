@@ -6,11 +6,17 @@ final public class RandomEventController extends BukkitRunnable {
 
     //Public methods
     public RandomEventController(RandomEventPlugin plugin);
+    
     @Override
     public void run();
+
     public void startGenerator();
     public void stopGenerator();
+    public void startRandomEvent(String name);
+    public void stopRandomEvent(UUID ID);
+
     public List<String> getActiveRandomEvents();
+    public List<String> getActiveRandomEventsID();
 
     //Private methods
     private void checkIfNewEventNeeded();
@@ -79,10 +85,19 @@ in every tick.
 ### Get Active Random Events
 
 ```java
-public List<String> getActiveRandomEvents()
+public List<String> getActiveRandomEvents();
+public List<String> getActiveRandomEventsID();
+
 ```
 
 Returns the currently active events in a list of strings
+
+Used by the [RandomEventCommand](../commands/RandomEventCommand.md)
+
+Structure:
+
+ 1. Name -> ID
+ 2. ID
 
 ### Generator State Change
 
@@ -92,6 +107,21 @@ public void stopGenerator();
 ```
 
 It stops or restarts the random event generator.
+
+### Starting and Stopping Random Events
+
+```java
+public void startRandomEvent(String name);
+public void stopRandomEvent(UUID ID);
+```
+
+It starts a random event by the name specified.
+
+Stops a random event by the ID specified.
+
+both __throws:__
+
+- RuneTimeException when it couldnt find a specified random event.
 
 ### Check if new event is needed
 

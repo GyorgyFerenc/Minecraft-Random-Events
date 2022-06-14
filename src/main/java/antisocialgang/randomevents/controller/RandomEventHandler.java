@@ -21,7 +21,7 @@ public class RandomEventHandler {
 
     public static RandomEventHandle getHandle(String name) {
         for (RandomEventHandle randomEventHandle : list) {
-            if (name == randomEventHandle.getName()) {
+            if (name.compareTo(randomEventHandle.getName()) == 0) {
                 return randomEventHandle;
             }
         }

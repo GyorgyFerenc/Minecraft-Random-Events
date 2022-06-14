@@ -2,6 +2,7 @@ package antisocialgang.randomevents.commands;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,6 +11,8 @@ import org.bukkit.command.TabExecutor;
 
 import antisocialgang.randomevents.RandomEventPlugin;
 import antisocialgang.randomevents.controller.RandomEventController;
+import antisocialgang.randomevents.controller.RandomEventHandler;
+import antisocialgang.randomevents.domain.RandomEvent.RandomEventHandle;
 
 /**
  * RandomEventCommand
@@ -64,11 +67,30 @@ public class RandomEventCommand implements TabExecutor {
     }
 
     private boolean startExecute(CommandSender sender, Command command, String label, String[] args) {
-        return false;
+
+        try {
+            String name = args[1];
+            sender.sendMessage(name);
+            this.randomEventController.startRandomEvent(name);
+            sender.sendMessage("Scheduled event");
+        } catch (Exception e) {
+            sender.sendMessage(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     private boolean stopExecute(CommandSender sender, Command command, String label, String[] args) {
-        return false;
+
+        try {
+            UUID ID = UUID.fromString(args[1]);
+            this.randomEventController.stopRandomEvent(ID);
+            sender.sendMessage("Event stoped");
+        } catch (Exception e) {
+            sender.sendMessage(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     private boolean listExecute(CommandSender sender, Command command, String label, String[] args) {
@@ -79,7 +101,7 @@ public class RandomEventCommand implements TabExecutor {
             builder.append('\n');
         }
         sender.sendMessage(builder.toString());
-        return false;
+        return true;
     }
 
     @Override
@@ -116,14 +138,16 @@ public class RandomEventCommand implements TabExecutor {
     }
 
     private List<String> stopComplete(CommandSender sender, Command command, String label, String[] args) {
-        List<String> l = new ArrayList<>();
-        l.add("[ID of the random event]");
+        List<String> l = this.randomEventController.getActiveRandomEventsID();
         return l;
     }
 
     private List<String> startComplete(CommandSender sender, Command command, String label, String[] args) {
         List<String> l = new ArrayList<>();
-        l.add("[EventType]");
+        List<RandomEventHandle> handles = RandomEventHandler.getEventHandles();
+        for (RandomEventHandle handle : handles) {
+            l.add(handle.getName());
+        }
         return l;
     }
 

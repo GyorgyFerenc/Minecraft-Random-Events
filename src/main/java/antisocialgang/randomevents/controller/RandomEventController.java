@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -13,6 +14,7 @@ import org.bukkit.scheduler.BukkitTask;
 import antisocialgang.randomevents.RandomEventPlugin;
 import antisocialgang.randomevents.domain.RandomEvent;
 import antisocialgang.randomevents.domain.RandomEventGenerator;
+import antisocialgang.randomevents.domain.RandomEvent.RandomEventHandle;
 
 /**
  * This is the main controller of the plugin.
@@ -45,6 +47,24 @@ final public class RandomEventController extends BukkitRunnable {
         this.runTaskTimer(this.plugin, 0, 0);
     }
 
+    public void startRandomEvent(String name) {
+        RandomEventHandle handle = RandomEventHandler.getHandle(name);
+        this.addRandomEvent(handle.create(this.plugin));
+    }
+
+    public void stopRandomEvent(UUID ID) {
+        Iterator<RandomEventWrapper> it = this.eventWrappers.iterator();
+
+        while (it.hasNext()) {
+            RandomEventWrapper eventWrapper = it.next();
+            if (eventWrapper.event.getID().compareTo(ID) == 0) {
+                it.remove();
+                return;
+            }
+        }
+        throw new RuntimeException("No random event found with that id");
+    }
+
     @Override
     public void run() {
         this.checkForExperiedEvents();
@@ -75,6 +95,21 @@ final public class RandomEventController extends BukkitRunnable {
             RandomEventWrapper eventWrapper = it.next();
             String s = " -> ";
             s = eventWrapper.event.getHandle().getName() + s;
+            s += eventWrapper.event.getID();
+            l.add(s);
+        }
+
+        return l;
+    }
+
+    public List<String> getActiveRandomEventsID() {
+        List<String> l = new ArrayList<>();
+
+        Iterator<RandomEventWrapper> it = this.eventWrappers.iterator();
+
+        while (it.hasNext()) {
+            RandomEventWrapper eventWrapper = it.next();
+            String s = "";
             s += eventWrapper.event.getID();
             l.add(s);
         }

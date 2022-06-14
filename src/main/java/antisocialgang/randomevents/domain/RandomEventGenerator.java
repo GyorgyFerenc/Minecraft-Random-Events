@@ -7,6 +7,8 @@ import java.util.Random;
 import com.google.common.collect.Range;
 
 import antisocialgang.randomevents.RandomEventPlugin;
+import antisocialgang.randomevents.controller.RandomEventHandler;
+import antisocialgang.randomevents.domain.RandomEvent.RandomEventHandle;
 
 /**
  * RandomEventGenerator
@@ -19,9 +21,10 @@ public class RandomEventGenerator {
     private int max;
 
     private void initList() {
-        this.addRandomEvent(() -> {
-            return new TestEvent(this.plugin);
-        }, 5);
+        List<RandomEventHandle> list = RandomEventHandler.getEventHandles();
+        for (RandomEventHandle eventHandle : list) {
+            this.addRandomEvent(eventHandle);
+        }
     }
 
     public RandomEventGenerator(RandomEventPlugin plugin) {
@@ -32,10 +35,14 @@ public class RandomEventGenerator {
         this.initList();
     }
 
-    private void addRandomEvent(Creator eventCreator, int weight) {
+    private void addRandomEvent(RandomEventHandle eventHandle) {
+        int weight = eventHandle.getWeight();
+
         Range<Integer> randomRange = this.createRandomRangeForRandomEvent(weight);
-        RandomEventWrapper eventWrapper = new RandomEventWrapper(eventCreator, randomRange);
+        RandomEventWrapper eventWrapper = new RandomEventWrapper(eventHandle, randomRange);
+
         this.list.add(eventWrapper);
+
         this.max += weight;
     }
 
@@ -61,7 +68,7 @@ public class RandomEventGenerator {
         for (RandomEventWrapper eventWrapper : this.list) {
             boolean choosenInRange = eventWrapper.randomRange.contains(choosen);
             if (choosenInRange) {
-                return eventWrapper.eventCreator.run();
+                return eventWrapper.eventHandle.create(this.plugin);
             }
         }
         throw new RuntimeException("Could not generate random event!");
@@ -78,10 +85,10 @@ interface Creator {
 
 class RandomEventWrapper {
     Range<Integer> randomRange;
-    public Creator eventCreator;
+    public RandomEventHandle eventHandle;
 
-    public RandomEventWrapper(Creator event, Range<Integer> randomRange) {
-        this.eventCreator = event;
+    public RandomEventWrapper(RandomEventHandle eventHandle, Range<Integer> randomRange) {
+        this.eventHandle = eventHandle;
         this.randomRange = randomRange;
     }
 

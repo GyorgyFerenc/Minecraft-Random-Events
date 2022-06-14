@@ -22,13 +22,23 @@ public abstract class RandomEvent implements Runnable {
     }
 
     /**
-     * Returns the duration of the random event in ticks
-     * This will be called by the RandomEventController so it knows when to end the
-     * random event
-     * 
-     * @return long - the duration of the random event
+     * It represents the a handle for the creation of the random event
      */
-    public abstract long getDuration();
+    public interface RandomEventHandle {
+        public long getDuration();
+
+        public String getName();
+
+        public int getWeight();
+
+        /**
+         * It creates the random event
+         * 
+         * @param plugin - The plugin
+         * @return The new random event
+         */
+        public RandomEvent create(RandomEventPlugin plugin);
+    }
 
     /**
      * Returns the ID of the current event
@@ -56,6 +66,10 @@ public abstract class RandomEvent implements Runnable {
 
     }
 
-    public abstract String getName();
-
+    /**
+     * Returns the handle for the random event
+     * 
+     * @return The specific RandomEventHandle
+     */
+    public abstract RandomEventHandle getHandle();
 }

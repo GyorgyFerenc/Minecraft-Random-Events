@@ -74,7 +74,7 @@ final public class RandomEventController extends BukkitRunnable {
         while (it.hasNext()) {
             RandomEventWrapper eventWrapper = it.next();
             String s = " -> ";
-            s = eventWrapper.event.getName() + s;
+            s = eventWrapper.event.getHandle().getName() + s;
             s += eventWrapper.event.getID();
             l.add(s);
         }
@@ -108,7 +108,7 @@ final public class RandomEventController extends BukkitRunnable {
         // Schedule the event
         BukkitTask task = Bukkit.getScheduler().runTaskTimer(this.plugin, event, 0, 0);
 
-        long endTime = this.tick + event.getDuration();
+        long endTime = this.tick + event.getHandle().getDuration();
         RandomEventWrapper wrapper = new RandomEventWrapper(event, endTime, task);
         this.eventWrappers.add(wrapper);
         Bukkit.getServer().broadcastMessage("Event added!"); // Debug

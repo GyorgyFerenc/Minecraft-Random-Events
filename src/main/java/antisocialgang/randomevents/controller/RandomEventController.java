@@ -58,6 +58,7 @@ final public class RandomEventController extends BukkitRunnable {
         while (it.hasNext()) {
             RandomEventWrapper eventWrapper = it.next();
             if (eventWrapper.event.getID().compareTo(ID) == 0) {
+                this.cancleRandomEvent(eventWrapper);
                 it.remove();
                 return;
             }
@@ -168,13 +169,17 @@ final public class RandomEventController extends BukkitRunnable {
         // Remove head
         this.eventWrappers.poll();
 
-        head.task.cancel();
-        Bukkit.getServer().broadcastMessage("Event cancelled!"); // Debug
-
-        head.event.cleanUp();
+        this.cancleRandomEvent(head);
 
         // Check for next event
         this.checkForExperiedEvents();
+    }
+
+    private void cancleRandomEvent(RandomEventWrapper event) {
+        event.task.cancel();
+        Bukkit.getServer().broadcastMessage("Event cancelled!"); // Debug
+
+        event.event.cleanUp();
     }
 }
 

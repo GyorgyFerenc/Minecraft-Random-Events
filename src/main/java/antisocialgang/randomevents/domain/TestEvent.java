@@ -42,7 +42,7 @@ public class TestEvent extends RandomEvent {
         if (!every10seconds)
             return;
 
-        Bukkit.getServer().broadcastMessage("This is the test event yeeeey!... Hello Mom!");
+        Bukkit.getServer().broadcastMessage("This with " + this.getID());
     }
 
 }

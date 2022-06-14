@@ -9,13 +9,31 @@ import antisocialgang.randomevents.RandomEventPlugin;
  */
 public class TestEvent extends RandomEvent {
 
-    public TestEvent(RandomEventPlugin plugin) {
-        super(plugin);
-    }
+    public final static RandomEventHandle handle = new RandomEventHandle() {
+        public long getDuration() {
+            return 20 * 60 * 2; // 2 minute
+        }
+
+        public String getName() {
+            return "TestEvent";
+        }
+
+        public int getWeight() {
+            return 5;
+        }
+
+        public RandomEvent create(RandomEventPlugin plugin) {
+            return new TestEvent(plugin);
+        };
+    };
 
     @Override
-    public long duration() {
-        return 20 * 60 * 2; // 2 minute
+    public RandomEventHandle getHandle() {
+        return handle;
+    }
+
+    public TestEvent(RandomEventPlugin plugin) {
+        super(plugin);
     }
 
     @Override
@@ -24,10 +42,7 @@ public class TestEvent extends RandomEvent {
         if (!every10seconds)
             return;
 
-        Bukkit.getServer().broadcastMessage("This is the test event yeeeey!... Hello Mom!");
+        Bukkit.getServer().broadcastMessage("This with " + this.getID());
     }
 
-    public static RandomEvent create(RandomEventPlugin plugin) {
-        return new TestEvent(plugin);
-    }
 }

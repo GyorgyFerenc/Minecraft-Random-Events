@@ -6,8 +6,17 @@ final public class RandomEventController extends BukkitRunnable {
 
     //Public methods
     public RandomEventController(RandomEventPlugin plugin);
+    
     @Override
     public void run();
+
+    public void startGenerator();
+    public void stopGenerator();
+    public void startRandomEvent(String name);
+    public void stopRandomEvent(UUID ID);
+
+    public List<String> getActiveRandomEvents();
+    public List<String> getActiveRandomEventsID();
 
     //Private methods
     private void checkIfNewEventNeeded();
@@ -21,6 +30,7 @@ final public class RandomEventController extends BukkitRunnable {
     private long eventTick; // Represents the tick on which it needs to create a new random event
     private long eventDelay; // Delay between new events
     private RandomEventGenerator generator;
+    private GeneratorState generatorState;
 
     private PriorityQueue<RandomEventWrapper> eventWrappers;
 }
@@ -33,6 +43,11 @@ class RandomEventWrapper{
     RandomEventWrapper(RandomEvent event, long endTime, BukkitTask task);
 }
 class RandomEventComparator implements Comparator<RandomEventWrapper>;
+
+enum GeneratorState {
+    RUNNING,
+    STOPPED
+}
 ```
 
 This is the main controller of the plugin.
@@ -41,6 +56,8 @@ It controlles the spawining and maintaining of the random events
 Tracking the events is done by using a priority queue where the events are sorted ascendingly by the it's endtime.
 Meaning the ones which end faster will be on top. This is achieved by two helper class the RandomEventWrapper which wraps the event for easier use.
 The other one is the RandomEventComparator which used to configure the priority queue see: [PriorityQueue](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/PriorityQueue.html), [Comparator](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Comparator.html).
+
+There is a state machine for the generator. It keeps track if random events should be generated or not.
 
 [Source file](../../../src/main/java/antisocialgang/randomevents/controller/RandomEventController.java)
 
@@ -64,6 +81,47 @@ public void run();
 
 It is called by the [BukkitScheduler](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/scheduler/BukkitScheduler.html)
 in every tick.
+
+### Get Active Random Events
+
+```java
+public List<String> getActiveRandomEvents();
+public List<String> getActiveRandomEventsID();
+
+```
+
+Returns the currently active events in a list of strings
+
+Used by the [RandomEventCommand](../commands/RandomEventCommand.md)
+
+Structure:
+
+ 1. Name -> ID
+ 2. ID
+
+### Generator State Change
+
+```java
+public void startGenerator();
+public void stopGenerator();
+```
+
+It stops or restarts the random event generator.
+
+### Starting and Stopping Random Events
+
+```java
+public void startRandomEvent(String name);
+public void stopRandomEvent(UUID ID);
+```
+
+It starts a random event by the name specified.
+
+Stops a random event by the ID specified.
+
+both __throws:__
+
+- RuneTimeException when it couldnt find a specified random event.
 
 ### Check if new event is needed
 

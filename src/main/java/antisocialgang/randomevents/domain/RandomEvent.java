@@ -1,6 +1,7 @@
 package antisocialgang.randomevents.domain;
 
 import java.lang.Runnable;
+import java.util.UUID;
 
 import antisocialgang.randomevents.RandomEventPlugin;
 
@@ -12,20 +13,41 @@ public abstract class RandomEvent implements Runnable {
     private long currentTick;
 
     protected final RandomEventPlugin plugin;
+    final UUID ID;
 
     protected RandomEvent(RandomEventPlugin plugin) {
         this.plugin = plugin;
         this.currentTick = 0;
+        this.ID = UUID.randomUUID();
     }
 
     /**
-     * Returns the duration of the random event in ticks
-     * This will be called by the RandomEventController so it knows when to end the
-     * random event
+     * It represents the a handle for the creation of the random event
+     */
+    public interface RandomEventHandle {
+        public long getDuration();
+
+        public String getName();
+
+        public int getWeight();
+
+        /**
+         * It creates the random event
+         * 
+         * @param plugin - The plugin
+         * @return The new random event
+         */
+        public RandomEvent create(RandomEventPlugin plugin);
+    }
+
+    /**
+     * Returns the ID of the current event
      * 
      * @return long - the duration of the random event
      */
-    public abstract long duration();
+    final public UUID getID() {
+        return this.ID;
+    }
 
     /**
      * Runs on every tick
@@ -44,4 +66,10 @@ public abstract class RandomEvent implements Runnable {
 
     }
 
+    /**
+     * Returns the handle for the random event
+     * 
+     * @return The specific RandomEventHandle
+     */
+    public abstract RandomEventHandle getHandle();
 }

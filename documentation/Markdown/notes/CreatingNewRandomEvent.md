@@ -18,69 +18,86 @@ public TestEvent(RandomEventPlugin plugin) {
 
 The constructor needs to get the RandomEventPlugin as its parameter and call super(plugin) on it, other then that no restriction
 
-Next step you want to override 2 functions:
-
-- public long duration()
-- public void tick(long tick)
-
+Next step you want to create and assign to the variable handle a new RandomEventHandle.
 see: [Random Event](../domain/RandomEvent.md)
 
 ```java
-@Override
-public long duration() { // Duration of the event
-    return 20 * 60 * 2; // 2 minute
-}
+public final static RandomEventHandle handle = new RandomEventHandle() {
+    public long getDuration() {
+        return 20 * 60 * 2; // 2 minute
+    }
 
-@Override
-public void tick(long tick) { //Runs on every tick
-    boolean every10seconds = tick % (20 * 10) == 0;
-    if (!every10seconds)
-        return;
+    public String getName() {
+        return "TestEvent";
+    }
 
-    Bukkit.getServer().broadcastMessage("This is the test event yeeeey!... Hello Mom!");
-}
+    public int getWeight() {
+        return 5;
+    }
+
+    public RandomEvent create(RandomEventPlugin plugin) {
+        return new TestEvent(plugin);
+    };
+};
 ```
 
-Next step is to tell the [Random Event Generator](../domain/RandomEventGenerator.md) that the random event exist.
-The method for this is the following:
+see: [Anonymous Inner Class Documentation](https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html)
+
+see: [Anonymous Inner Class Youtube Video](https://www.youtube.com/watch?v=DwtPWZn6T1A)
+
+Note that this is one way to do it, using anonnymous inner classes, but you can do it via a new class and assign it that way.
 
 ```java
-public class RandomEventGenerator {
-    ...
-    private void initList() {
-        ...
-        this.addRandomEvent(() -> {
-            return new TestEvent(this.plugin);
-        }, 5);
+class TestEventHandle implements RandomEventHandle {
+
+    public long getDuration() {
+        return 20 * 60 * 2; // 2 minute
     }
+
+    public String getName() {
+        return "TestEvent";
+    }
+
+    public int getWeight() {
+        return 5;
+    }
+
+    public RandomEvent create(RandomEventPlugin plugin) {
+        return new TestEvent(plugin);
+    };
+}
+public class TestEvent extends RandomEvent {
+    ...
+    public final static RandomEventHandle handle = new TestEventHandle();
     ...
 }
 ```
 
-In the initList function of the RandomEventGenerator call the [addRandomEventFunction](../domain/RandomEventGenerator.md#add-random-event) with a lambda expression of no argument which returns a new RandomEvent, and a weight.
+You need to override the getHandle() function:
+
+```java
+@Override
+public RandomEventHandle getHandle() {
+    return handle;
+}
+```
+
+Next step is to register the RandomEventHandle to the RandomEventHandler.
+It is done in the plugin's onEnable function.
+
+```java
+public class RandomEventPlugin extends JavaPlugin {
+    ...
+    @Override
+    public void onEnable() {
+        ...
+        // Register events
+        RandomEventHandler.registerRandomEvent(TestEvent.handle);
+        ...
+    }
+}
+```
 
 ## Important notes
-
-- If the creation of the event is complex create a static function called create and wrap that around with the lambda
-
-```Java
-class TestEvent extends RandomEvent{
-    ...
-    public static RandomEvent create(RandomEventPlugin plugin) {
-        return new TestEvent(plugin);
-    }
-}
-
-public class RandomEventGenerator {
-    ...
-    private void initList() {
-        ...
-        this.addRandomEvent(() -> {
-            return TestEvent.create(this.plugin);
-        }, 5);
-    }
-    ...
-}
-```
 
 - If the event has things to clean up before destruction override the function [cleanUp](../domain/RandomEvent.md#clean-up)

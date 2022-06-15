@@ -129,7 +129,7 @@ final public class RandomEventController extends BukkitRunnable {
             return;
         }
 
-        this.eventTick += this.eventDelay;
+        this.eventTick = this.tick + this.eventDelay;
 
         RandomEvent event = this.generator.getEvent();
         this.addRandomEvent(event);

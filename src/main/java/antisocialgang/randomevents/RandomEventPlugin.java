@@ -6,6 +6,7 @@ import antisocialgang.randomevents.commands.RandomEventCommand;
 import antisocialgang.randomevents.controller.RandomEventController;
 import antisocialgang.randomevents.controller.RandomEventHandler;
 import antisocialgang.randomevents.domain.TestEvent;
+import antisocialgang.randomevents.domain.randomevents.ZombieApocalypse;
 
 public class RandomEventPlugin extends JavaPlugin {
     // private RandomEventController controller;
@@ -18,6 +19,7 @@ public class RandomEventPlugin extends JavaPlugin {
 
         // Register events
         RandomEventHandler.registerRandomEvent(TestEvent.handle);
+        RandomEventHandler.registerRandomEvent(ZombieApocalypse.handle);
 
         this.randomEventController = new RandomEventController(this);
         new RandomEventCommand(this, randomEventController);

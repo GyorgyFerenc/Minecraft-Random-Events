@@ -2,6 +2,7 @@ main: antisocialgang.randomevents.RandomEventPlugin
 name: RandomEvents
 authors: [madx01,Tom3s]
 version: 1.0
+api-version: 1.18
 
 commands:
   randomevent:

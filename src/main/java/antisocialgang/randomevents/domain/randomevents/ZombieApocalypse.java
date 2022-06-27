@@ -43,13 +43,15 @@ public class ZombieApocalypse extends RandomEvent implements Listener {
     private static final int STRENGHT_CHANCE = 10;
     private static final int EXPLOSIVE_CHANCE = 5;
 
+    private static final int NUMBER_OF_TRIES_FOR_SPAWING = 50;
+
     private boolean canceled = false;
 
     private HashSet<UUID> explodingZombies;
 
     public static final RandomEventHandle handle = new RandomEventHandle() {
         public long getDuration() {
-            return 60 * 20 * 5;
+            return 20 * 60 * 5;
             // return 2;
         };
 
@@ -101,7 +103,7 @@ public class ZombieApocalypse extends RandomEvent implements Listener {
         for (Player p : this.plugin.getServer().getOnlinePlayers()) {
             Location l = p.getLocation();
 
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < NUMBER_OF_TRIES_FOR_SPAWING; i++) {
 
                 Location possibble = generatePossibleLocation(l);
                 Location spawnable = getSpawnable(possibble);

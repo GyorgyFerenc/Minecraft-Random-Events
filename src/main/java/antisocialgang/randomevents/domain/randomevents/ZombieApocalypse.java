@@ -24,6 +24,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.checkerframework.checker.index.qual.LowerBoundBottom;
 
 import antisocialgang.randomevents.RandomEventPlugin;
 import antisocialgang.randomevents.domain.RandomEvent;
@@ -210,7 +211,7 @@ public class ZombieApocalypse extends RandomEvent implements Listener {
     }
 
     /**
-     * Tries to find a spawnable location, starting from y+20 to y-20.
+     * Tries to find a spawnable location, starting from y+20 to minY.
      * Returns null if id didnt find one
      * 
      * @param location - starting location
@@ -219,7 +220,8 @@ public class ZombieApocalypse extends RandomEvent implements Listener {
     private Location getSpawnable(Location location) {
         Location possibleLocation = location.clone();
         possibleLocation.add(0, 20, 0);
-        while (possibleLocation.getBlockY() > -64) {
+        int minY = possibleLocation.getWorld().getMinHeight();
+        while (possibleLocation.getBlockY() > minY) {
             if (isSpawnable(possibleLocation)) {
                 return possibleLocation;
             }

@@ -17,6 +17,7 @@ import antisocialgang.randomevents.domain.RandomEvent;
  */
 public class MeteorShower extends RandomEvent {
 
+    private static final int FIREBALL_YIELD = 6;
     private static final int SHOWER_RADIUS = 64;
     private static final Vector METEOR_DIRECTION = new Vector(.1, -1, 0);
     private static final long TICKS_BETWEEN_METEORS = 10; // .5 sec
@@ -69,7 +70,7 @@ public class MeteorShower extends RandomEvent {
         l.setDirection(METEOR_DIRECTION);
 
         Fireball fireball = (Fireball) world.spawnEntity(l, EntityType.FIREBALL);
-        fireball.setYield(6);
+        fireball.setYield(FIREBALL_YIELD);
     }
 
     @Override

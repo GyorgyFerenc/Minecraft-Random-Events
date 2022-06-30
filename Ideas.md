@@ -133,9 +133,9 @@
 - [ ] Wind (constantly move player sideways)
 - [ ] Dyslexia
   - [ ] Inventory and item names keep getting shuffled (yes even armor slots)
-- [ ] Walking Dead
-  - [ ] Zombie hoard
-  - [ ] Custom zombies
+- [X] Zombie Apocalypse
+  - [X] Zombie hoard
+  - [X] Custom zombies
 - [ ] Slender man
   - [ ] Slender man duh
 - [ ] Meteor shower

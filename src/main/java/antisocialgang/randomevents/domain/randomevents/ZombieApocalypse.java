@@ -24,7 +24,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.checkerframework.checker.index.qual.LowerBoundBottom;
 
 import antisocialgang.randomevents.RandomEventPlugin;
 import antisocialgang.randomevents.domain.RandomEvent;

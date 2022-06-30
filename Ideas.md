@@ -135,7 +135,7 @@
   - [X] Custom zombies
 - [ ] Slender man
   - [ ] Slender man duh
-- [ ] Meteor shower
+- [X] Meteor shower
 
 ## All or nothing effects
 

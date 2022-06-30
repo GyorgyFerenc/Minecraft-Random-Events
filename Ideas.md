@@ -25,11 +25,8 @@
 
 > These effects will be regularly fucking with the player
 
-- [ ] One potion effect
-  - [ ] gives an effect
-  - [ ] keep checking if effect is still on player, and reapply if not (ie. after drinking milk, dying, etc.)
-- [ ] Random potion effect
-  - [ ] Apply random potion effect for 10 secs, every 10 sec
+- [X] Random potion effect
+  - [X] Apply random potion effect for 30 secs, every 30 sec
 - [ ] inversed controls
 - [ ] curse of binding pumpkin
   - [ ] if player had helmet, put it into inventory

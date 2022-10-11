@@ -113,7 +113,7 @@ It returns the Name of the RandomEvent
  public int RandomEventHandle.getWeight();
 ```
 
-It returns the wight of the random event.
+It returns the weight of the random event.
 Note that the weight 5 means common, if you want the event to be more rare use a lesser value, if more common use a greater value.
 
 ### Create

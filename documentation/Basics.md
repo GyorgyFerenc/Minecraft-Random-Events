@@ -28,7 +28,7 @@ git merge bugFixes # Merges bugFixes to unstable
 - Commit your stuff, especially before merge
 - Commit only necessary files
 - Be carefull when resolving merge clashes
-- Check if unstable got updated merge with your current branch
+- Check if unstable got updated, if so merge with your current branch
 - If you do not want to use the terminal commands learn vscode git gui or github desktop gui
 - Always check which branch are you on before starting to work
 

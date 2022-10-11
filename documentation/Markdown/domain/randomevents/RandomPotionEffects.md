@@ -3,8 +3,6 @@
 ```java
 public class RandomPotionEffects extends RandomEvent {
 
-    
-
     @Override
     public RandomEventHandle getHandle();
     

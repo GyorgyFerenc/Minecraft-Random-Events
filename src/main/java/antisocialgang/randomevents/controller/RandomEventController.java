@@ -156,8 +156,7 @@ final public class RandomEventController extends BukkitRunnable {
      */
     private void checkForExperiedEvents() {
         RandomEventWrapper head = this.eventWrappers.peek();
-        boolean emptyQueue = head == null;
-        if (emptyQueue) {
+        if (head == null) {
             return;
         }
 

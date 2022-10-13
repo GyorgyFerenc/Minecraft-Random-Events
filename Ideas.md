@@ -114,7 +114,6 @@
   - [ ] Superfast underwater
   - [ ] Damage and very slow outside water
 - [ ] Natural disasters
-  - [ ] Meteor Rain
   - [ ] Earthquake (Move player back and forth, nearby blocks have gravity, player drops items)
   - [ ] Volcano eruption
   - [ ] Hurricane
